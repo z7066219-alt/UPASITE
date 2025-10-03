@@ -6,12 +6,6 @@ import BlogModal from '../components/modals/BlogModal';
 import LabModal from '../components/modals/LabModal';
 import ClubModal from '../components/modals/ClubModal';
 
-import laboScience from '../assets/infosalle.jpg';
-import labLangues from '../assets/VieEtudiante2.jpg';
-import facebook from '../assets/facebook.png';
-import instagram from '../assets/instagram.png';
-import blog1 from '../assets/robo2.jpg';
-
 import gallery1 from '../assets/VieEtudiante.jpg';
 import gallery2 from '../assets/malagasy.jpg';
 import gallery3 from '../assets/malagasy2.jpg';
@@ -20,30 +14,31 @@ import gallery5 from '../assets/malagache.jpg';
 import gallery6 from '../assets/robo2.jpg';
 import gallery7 from '../assets/robo1.jpg';
 import gallery8 from '../assets/BDS.jpg';
-
 import gallery9 from '../assets/integration1.jpg';
 import gallery10 from '../assets/integration2.jpg';
 import gallery11 from '../assets/integration3.jpg';
 import gallery12 from '../assets/integration4.jpg';
 import gallery13 from '../assets/integration5.jpg';
-
+import Navbar from '../components/Navbar';
+import laboScience from '../assets/infosalle.jpg';
+import labLangues from '../assets/VieEtudiante2.jpg';
 import club1Fond from '../assets/logoRE.jpg';
 import club2Fond from '../assets/logoCC.png';
 import club3Fond from '../assets/sport.jpg';
 import club3basket1 from '../assets/BDS.jpg';
 import club3basket2 from '../assets/basket2.jpg';
-import Navbar from '../components/Navbar';
+import blog1 from '../assets/robo2.jpg';
 
 const labs = [
   {
     id: 'lab1',
     image: laboScience,
     title: 'Science & Technologie',
-    description: 'Un laboratoire équipé des technologies pour la recherche en informatique et tout ce qui va avec.',
+    description: "Un laboratoire équipé des dernières technologies pour la recherche en informatique, intelligence artificielle et robotique.",
     features: [
-      { icon: '🔬', title: 'IA & Robotique', description: 'Plateformes de développement IA' },
-      { icon: '⚛️', title: 'Réseaux', description: 'Wi-Fi et câblage pour apprentissage' },
-      { icon: '💻', title: 'Informatique', description: 'Salle serveur haute performance' }
+      { icon: '🤖', title: 'IA & Robotique', description: 'Plateformes IA (TensorFlow, PyTorch) et kits Arduino/Raspberry Pi' },
+      { icon: '🌐', title: 'Réseaux & Cybersecurité', description: 'Infrastructure réseau complète avec switches Cisco et serveurs' },
+      { icon: '💻', title: 'Salle Serveur & Cloud', description: 'Datacenter avec virtualisation et accès aux plateformes cloud' }
     ]
   },
   {
@@ -52,9 +47,9 @@ const labs = [
     title: 'Centre Linguistique',
     description: "Un espace moderne dédié à l'apprentissage des langues avec des technologies de pointe.",
     features: [
-      { icon: '🌐', title: '3 Langues', description: 'Cours de langues étrangères' },
-      { icon: '📝', title: 'TOEFL Prep', description: 'Préparation aux tests' },
-      { icon: '📚', title: 'Bibliothèque', description: 'Ressources multilingues' }
+      { icon: '🌍', title: 'Apprentissage Multilingue', description: 'Cours avec professeurs natifs certifiés' },
+      { icon: '🎧', title: 'Laboratoire Audio-Visuel', description: 'Cabines individuelles pour exercices de prononciation' },
+      { icon: '📝', title: 'Préparation Certifications', description: 'Programmes TOEFL, IELTS, DELF avec simulations' }
     ]
   }
 ];
@@ -64,26 +59,60 @@ const clubs = [
     id: 'club1',
     image: club1Fond,
     title: 'Club Entrepreneuriat',
-    description: "Encourage l'esprit d'entreprise chez les étudiants avec ateliers et mentorat.",
-    activities: ['Startup Weekend', 'Pitch Competitions', 'Mentorat', "Visites d'entreprises"]
+    description: "Le Club Entrepreneuriat stimule l'innovation et l'esprit d'entreprise chez les étudiants.",
+    activities: ['Startup Weekend', 'Pitch Competitions', 'Mentorat', 'Visites d\'entreprises', 'Ateliers Business Plan']
   },
   {
     id: 'club2',
     image: club2Fond,
-    title: 'Club Culture',
-    description: 'Promouvoir la diversité culturelle à travers événements et échanges.',
-    activities: ['Soirées culturelles', 'Ateliers artistiques', 'Excursions', 'Festivals']
+    title: 'Club Culture & Arts',
+    description: 'Le Club Culture célèbre la diversité culturelle à travers événements et spectacles.',
+    activities: ['Soirées culturelles', 'Ateliers artistiques', 'Excursions', 'Festivals', 'Expositions']
   },
   {
     id: 'club3',
     image: club3Fond,
     image1: club3basket1,
     image2: club3basket2,
-    title: 'Club Basket',
-    description: 'L’esprit sportif de nos étudiants.',
+    title: 'Club Basket UPA',
+    description: "Le Club Basket incarne l'esprit sportif et la cohésion d'équipe.",
     liensFB: 'https://www.facebook.com/profile.php?id=61569998111954',
     liensIG: 'https://www.instagram.com/bde_upa/',
-    activities: ['Matchs inter-classes', 'Entraînements', 'Excursions']
+    activities: ['Entraînements', 'Matchs inter-classes', 'Compétitions', 'Team building']
+  }
+];
+
+const blogArticles = [
+  {
+    id: 1,
+    src: blog1,
+    title: 'Hackathon Inter-Universitaire 2025',
+    date: '01 Mai 2025',
+    category: 'Compétition Tech',
+    excerpt: 'Nos étudiants brillent lors du hackathon...',
+    content: "Le Hackathon Inter-Universitaire 2025 a réuni plus de 60 étudiants de 8 universités. Notre université UPA était représentée par deux équipes exceptionnelles.",
+    contentHack1: 'UPADEVSTORM et ZAY BACK IDEV se sont classés 2ème et 4ème. Bravo à tous nos participants !',
+    tags: ['Événement', 'Hackathon', 'Innovation']
+  },
+  {
+    id: 2,
+    src: gallery3,
+    title: 'Taom-baovao Malagasy',
+    date: '02 Mai 2025',
+    category: 'Culture',
+    excerpt: 'Célébration du Nouvel An malgache...',
+    content: "Plus de 150 personnes se sont réunies pour célébrer le Taom-baovao Malagasy avec spectacles traditionnels.",
+    tags: ['Culture', 'Traditions', 'Madagascar']
+  },
+  {
+    id: 3,
+    src: gallery4,
+    title: 'Série de Conférences 2025',
+    date: '15 Mars 2025',
+    category: 'Conférences',
+    excerpt: 'Série de conférences enrichissantes...',
+    content: "Des experts nationaux et internationaux ont partagé leurs connaissances sur l'innovation et l'avenir.",
+    tags: ['Conférences', 'Innovation', 'Partenariats']
   }
 ];
 
@@ -101,37 +130,6 @@ const galleryImages = [
   { id: 11, src: gallery11, title: 'Journée d’intégration 2025', description: 'Le défi' },
   { id: 12, src: gallery12, title: 'Journée d’intégration 2025', description: 'Ambiance festive' },
   { id: 13, src: gallery13, title: 'Journée d’intégration 2025', description: 'La joie en images' },
-];
-
-const blogArticles = [
-  {
-    id: 1,
-    src: blog1,
-    title: 'Hackathon',
-    date: '01/05/2025',
-    excerpt: 'Aperçu…',
-    content:
-      "Événement organisé par SmartOne pour un tournoi inter-universitaire en informatique. Notre université a envoyé deux représentants.",
-    contentHack1: 'Nos deux équipes mixtes : UPADEVSTORM et ZAY BACK IDEV.'
-  },
-  {
-    id: 2,
-    src: gallery3,
-    title: 'Taom-baovao Malagasy',
-    date: '02/05/2025',
-    excerpt: 'Aperçu…',
-    content:
-      "À l’occasion du Nouvel An malgache, nos étudiants ont organisé des exposés, des spectacles artistiques et diverses activités pour célébrer."
-  },
-  {
-    id: 3,
-    src: gallery4,
-    title: 'Conférence annuelle',
-    date: '03/05/2025',
-    excerpt: 'Aperçu…',
-    content:
-      "Des conférences sur divers sujets ont eu lieu sur notre campus pour sensibiliser, partager de nouvelles connaissances et favoriser des partenariats."
-  }
 ];
 
 const VieEtudiante = () => {

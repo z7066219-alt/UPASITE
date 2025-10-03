@@ -4,6 +4,7 @@ import {
   Code, Building2, Megaphone, BookOpen, Brain, X,
   ChevronRight, GraduationCap, CheckCircle2, Sparkles
 } from 'lucide-react';
+import ProgramModal from './modals/ProgramModal';
 import hest from '../assets/hest.png';
 import hecm from '../assets/hecm.png';
 import hep from '../assets/hep.png';
@@ -42,6 +43,7 @@ const schools = [
 const Programme = () => {
   const [selectedSchool, setSelectedSchool] = useState(null);
   const [selectedProgram, setSelectedProgram] = useState(null);
+  const [showProgramModal, setShowProgramModal] = useState(false);
 
   const getSchoolPrograms = (schoolCode) => {
     const codeMap = { HEST: 'HEST', HECM: 'HECM', HELS: 'HELS' };
@@ -55,6 +57,7 @@ const Programme = () => {
 
   const openProgramDetail = (programKey) => {
     setSelectedProgram(programKey);
+    setShowProgramModal(true);
   };
 
   return (
@@ -131,7 +134,7 @@ const Programme = () => {
         </div>
 
         <AnimatePresence>
-          {selectedSchool && (
+          {selectedSchool && !showProgramModal && (
             <motion.div
               className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
               initial={{ opacity: 0 }}
@@ -149,7 +152,7 @@ const Programme = () => {
                 exit={{ scale: 0.9, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className={`sticky top-0 z-10 bg-gradient-to-r ${selectedSchool.gradient} p-6 text-white`}>
+                <div className={`sticky top-0 z-10 bg-gradient-to-r ${selectedSchool.gradient} p-6 text-white rounded-t-2xl`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <img src={selectedSchool.image} alt={selectedSchool.code} className="w-12 h-12 rounded-lg shadow-lg" />
@@ -171,112 +174,83 @@ const Programme = () => {
                 </div>
 
                 <div className="p-8">
-                  {!selectedProgram ? (
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {Object.entries(getSchoolPrograms(selectedSchool.code)).map(([key, program]) => (
-                        <motion.div
-                          key={key}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="group cursor-pointer bg-gray-50 dark:bg-dark-900 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-primary-500"
-                          onClick={() => openProgramDetail(key)}
-                        >
-                          <div className="relative h-48 overflow-hidden">
-                            <img
-                              src={program.cover}
-                              alt={program.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            <div className="absolute bottom-4 left-4 right-4">
-                              <h3 className="text-xl font-bold text-white">{program.title}</h3>
-                            </div>
-                          </div>
-                          <div className="p-6">
-                            <div className="mb-4">
-                              <div className="flex items-center gap-2 mb-3">
-                                <Sparkles className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-                                <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Spécialisations</span>
-                              </div>
-                              <ul className="space-y-2">
-                                {program.specializations.map((spec, i) => (
-                                  <li key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
-                                    {spec}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <button className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
-                              Voir les modules
-                              <ChevronRight className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => setSelectedProgram(null)}
-                        className="mb-6 flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:gap-3 transition-all"
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {Object.entries(getSchoolPrograms(selectedSchool.code)).map(([key, program]) => (
+                      <motion.div
+                        key={key}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="group cursor-pointer bg-gray-50 dark:bg-dark-900 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-primary-500"
+                        onClick={() => openProgramDetail(key)}
                       >
-                        <ChevronRight className="w-5 h-5 rotate-180" />
-                        Retour aux parcours
-                      </button>
-
-                      {(() => {
-                        const program = getSchoolPrograms(selectedSchool.code)[selectedProgram];
-                        return (
-                          <div>
-                            <div className="mb-8">
-                              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                                {program.title}
-                              </h3>
-                              <div className="flex flex-wrap gap-2">
-                                {program.specializations.map((spec, i) => (
-                                  <span
-                                    key={i}
-                                    className="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
-                                  >
-                                    {spec}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-
-                            <div className="space-y-8">
-                              {program.modules.map((module, idx) => (
-                                <motion.div
-                                  key={idx}
-                                  initial={{ opacity: 0, x: -20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: idx * 0.1 }}
-                                  className="bg-gradient-to-r from-gray-50 to-blue-50/50 dark:from-dark-900 dark:to-dark-800 rounded-xl p-6 border border-gray-200 dark:border-dark-700"
-                                >
-                                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-sm font-bold">
-                                      {idx + 1}
-                                    </div>
-                                    {module.category}
-                                  </h4>
-                                  <ul className="space-y-3">
-                                    {module.courses.map((course, i) => (
-                                      <li key={i} className="flex items-start gap-3 text-gray-700 dark:text-gray-300">
-                                        <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
-                                        <span>{course}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </motion.div>
-                              ))}
-                            </div>
+                        <div className="relative h-48 overflow-hidden">
+                          <img
+                            src={program.cover}
+                            alt={program.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <h3 className="text-xl font-bold text-white">{program.title}</h3>
                           </div>
-                        );
-                      })()}
-                    </div>
-                  )}
+                        </div>
+                        <div className="p-6">
+                          <div className="mb-4">
+                            <div className="flex items-center gap-2 mb-3">
+                              <Sparkles className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Spécialisations</span>
+                            </div>
+                            <ul className="space-y-2">
+                              {program.specializations.map((spec, i) => (
+                                <li key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+                                  {spec}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          <button className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                            Découvrir le programme
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {showProgramModal && selectedSchool && selectedProgram && (
+            <motion.div
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => {
+                setShowProgramModal(false);
+                setSelectedProgram(null);
+              }}
+            >
+              <motion.div
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full"
+              >
+                <ProgramModal
+                  school={selectedSchool}
+                  program={getSchoolPrograms(selectedSchool.code)[selectedProgram]}
+                  programKey={selectedProgram}
+                  onClose={() => {
+                    setShowProgramModal(false);
+                    setSelectedProgram(null);
+                  }}
+                />
               </motion.div>
             </motion.div>
           )}
