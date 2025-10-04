@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowRight, X } from 'lucide-react';
 import { newsList } from '../data/newsList';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import NewsModal from '../components/modals/NewsModal';
 import Navbar from '../components/Navbar';
 
 const News = () => {
@@ -37,43 +38,30 @@ const News = () => {
         ))}
       </div>
 
-      {openIdx !== null && (
-        <div
-          onClick={() => setOpenIdx(null)}
-          className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto relative"
+      <AnimatePresence>
+        {openIdx !== null && (
+          <motion.div
+            onClick={() => setOpenIdx(null)}
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-          <div className="flex justify-between items-center sticky top-0 p-3 z-10 w-full bg-white dark:bg-gray-800">            
-            <span className=" bg-blue-500 text-white text-xs px-2 py-1 rounded">{newsList[openIdx].type}</span>
-              <button
-                onClick={() => setOpenIdx(null)}
-                className="absolute top-3 right-3 text-gray-500"
-              >
-                <X size={27} className='' />
-              </button>
-            </div>
-
-          <div className="p-6">
-            <img
-              src={newsList[openIdx].image}
-              alt={newsList[openIdx].title}
-              className="w-[99.9%] h-full object-cover rounded mb-4"
-            />
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{newsList[openIdx].title}</h3>
-            <time className="block text-sm text-gray-500 dark:text-gray-300 mb-4">{newsList[openIdx].date}</time>
-            <p className="text-gray-700 dark:text-gray-300 mb-4">{newsList[openIdx].description}</p>
-            <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-              {newsList[openIdx].details.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </div>
-          </div>
-        </div>
-      )}
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="w-full"
+            >
+              <NewsModal
+                news={newsList[openIdx]}
+                onClose={() => setOpenIdx(null)}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
 
      </> 

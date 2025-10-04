@@ -5,6 +5,7 @@ import Contenue from "./pages/Contenue";
 import VieEtudiante from "./pages/VieEtudiante";
 import Admission from "./pages/Admission";
 import News from "./pages/News";
+import CalendrierUniversitaire from "./components/CalendrierUniversitaire";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollToHash from "./components/ScrollToHash";
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/vie-etudiante" element={<VieEtudiante />} />
             <Route path="/actualites" element={<News />} />
             <Route path="/admission" element={<Admission />} />
+            <Route path="/calendrier" element={<CalendrierUniversitaire />} />
           </Routes>
         </main>
 

@@ -17,6 +17,44 @@ export const programModules = {
         'Génie Logiciel',
         'Administration Systèmes & Réseaux'
       ],
+      systemePedagogique: {
+        approche: 'Théorique et Pratique',
+        repartition: '40% Théorique / 60% Pratique',
+        description: "Notre approche pédagogique en Informatique privilégie l'apprentissage par la pratique. Les cours théoriques posent les fondamentaux, tandis que les travaux pratiques, projets et stages permettent aux étudiants de développer des compétences concrètes. Chaque semestre inclut des projets réels avec des partenaires professionnels.",
+        methodes: [
+          'Cours Magistraux avec supports multimédia interactifs',
+          'Travaux Pratiques en laboratoires équipés (70% du temps)',
+          'Projets de groupe interdisciplinaires',
+          'Hackathons et compétitions de programmation',
+          'Stages en entreprise (6 mois minimum)',
+          'Mémoire de fin d\\\'études basé sur un projet réel'
+        ]
+      },
+      debouches: {
+        secteurs: [
+          'Entreprises tech et startups innovantes',
+          'Banques et institutions financières (fintech)',
+          'Agences de développement web et mobile',
+          'Sociétés de conseil en systèmes d\\\'information',
+          'Administrations publiques et organisations internationales',
+          'Freelance et entrepreneuriat technologique'
+        ],
+        metiers: [
+          'Développeur Full Stack (Front-end, Back-end)',
+          'Ingénieur Génie Logiciel / Software Engineer',
+          'Administrateur Systèmes et Réseaux',
+          'DevOps Engineer / Cloud Architect',
+          'Data Scientist / Ingénieur IA & Machine Learning',
+          'Chef de Projet IT / Scrum Master',
+          'Consultant en Cybersécurité',
+          'Entrepreneur Tech / Fondateur de startup'
+        ],
+        salaires: {
+          debutant: '800 000 - 1 200 000 Ar/mois',
+          experimente: '1 500 000 - 3 000 000 Ar/mois',
+          senior: '3 500 000 - 6 000 000+ Ar/mois'
+        }
+      },
       modules: [
         {
           category: 'Développement',
